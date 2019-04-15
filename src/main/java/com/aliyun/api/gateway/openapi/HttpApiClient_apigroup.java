@@ -21,9 +21,6 @@ public class HttpApiClient_apigroup extends ApacheHttpClient{
         super.init(httpClientBuilderParams);
     }
 
-
-
-
     public void apitest(ApiCallback callback) {
         String path = "/testpath/hello";
         ApiRequest request = new ApiRequest(HttpMethod.POST_BODY , path, "{}".getBytes());
