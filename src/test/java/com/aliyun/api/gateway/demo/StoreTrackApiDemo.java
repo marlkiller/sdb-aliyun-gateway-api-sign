@@ -25,22 +25,8 @@ import com.aliyun.api.gateway.demo.constant.ContentType;
 import com.aliyun.api.gateway.demo.constant.HttpHeader;
 import com.aliyun.api.gateway.demo.constant.HttpSchema;
 import com.aliyun.api.gateway.demo.enums.Method;
-import com.aliyun.api.gateway.demo.util.MessageDigestUtil;
-import com.aliyun.api.gateway.demo.util.SignUtil;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
 import org.junit.Test;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
 import java.util.*;
 
 /**
@@ -48,11 +34,11 @@ import java.util.*;
  */
 public class StoreTrackApiDemo {
     // APP KEY
-    private final static String APP_KEY = "26010215";
+    private final static String APP_KEY = "26026601";
     // APP密钥
     private final static String APP_SECRET = "6abb96c01e20f44d0cc8e2ad17ffaac6";
     //API域名
-    private final static String HOST = "storetrack-api.ikea.cn";
+    private final static String HOST = "4e99dc00a9e345fc9c754d95c4eb1ca1-cn-hangzhou.alicloudapi.com";
     //自定义参与签名Header前缀（可选,默认只有"X-Ca-"开头的参与到Header签名）
     private final static List<String> CUSTOM_HEADERS_TO_SIGN_PREFIX = new ArrayList<String>();
 
@@ -64,7 +50,7 @@ public class StoreTrackApiDemo {
     @Test
     public void test() throws Exception {
         //请求path
-        String path = "/sync_data/test";
+        String path = "/testpath/hello";
 
         Map<String, String> headers = new HashMap<String, String>();
         // API 调用者生成的 UUID，结合时间戳防重放
@@ -91,19 +77,9 @@ public class StoreTrackApiDemo {
     @Test
     public void syncStoreTrack() throws Exception {
         //请求path
-        String path = "/sync_data/sync_with_json";
+        String path = "/testpath/hello";
         //Body内容
-        String body = "{\n" +
-                "    \"time\": \"2019-04-02 12:30:55\",\n" +
-                "    \"unique_id\": \"25f9e794323b453885f5181f1b624d0b\",\n" +
-                "    \"floor_id\":\"10\",\n" +
-                "    \"floor_name\":\"楼层名\",\n" +
-                "    \"leaving_num\":10,\n" +
-                "    \"vistor_num\":12,\n" +
-                "    \"position\":\"点位名称\",\n" +
-                "    \"mall_area\":\"区域\",\n" +
-                "    \"traffic_flow\": 40\n" +
-                "}";
+        String body = "";
         // String body = "{}";
         Map<String, String> headers = new HashMap<String, String>();
         //（必填）根据期望的Response内容类型设置
@@ -113,7 +89,7 @@ public class StoreTrackApiDemo {
         // API 调用者生成的 UUID，结合时间戳防重放
         headers.put("X-Ca-Nonce", UUID.randomUUID().toString());
 
-        Request request = new Request(Method.POST_STRING, HttpSchema.HTTPS + HOST, path, APP_KEY, APP_SECRET, Constants.DEFAULT_TIMEOUT);
+        Request request = new Request(Method.POST_STRING, HttpSchema.HTTP + HOST, path, APP_KEY, APP_SECRET, Constants.DEFAULT_TIMEOUT);
         request.setHeaders(headers);
         request.setSignHeaderPrefixList(CUSTOM_HEADERS_TO_SIGN_PREFIX);
         // Query
