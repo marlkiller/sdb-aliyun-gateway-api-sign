@@ -1,38 +1,26 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-package com.aliyun.api.gateway.demo;
+package com.aliyun.api.gateway.openapi;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.aliyun.api.gateway.demo.Client;
+import com.aliyun.api.gateway.demo.Request;
+import com.aliyun.api.gateway.demo.Response;
 import com.aliyun.api.gateway.demo.constant.Constants;
 import com.aliyun.api.gateway.demo.constant.ContentType;
 import com.aliyun.api.gateway.demo.constant.HttpHeader;
 import com.aliyun.api.gateway.demo.constant.HttpSchema;
 import com.aliyun.api.gateway.demo.enums.Method;
-import org.junit.Test;
 
 import java.util.*;
 
 /**
- * 前端调用示例
+ * @author voidm
+ * @date 2019-05-22
  */
-public class StoreTrackApiDemo {
+public class Main {
+
+    // 203724351
+    // 30j96k3rew4jdk6rxh89nw8e0ec2ox0a
     // APP KEY
     private final static String APP_KEY = "26010215";
     // APP密钥
@@ -47,37 +35,10 @@ public class StoreTrackApiDemo {
      *
      * @throws Exception
      */
-    @Test
-    public void test() throws Exception {
+    public static void test() throws Exception {
         //请求path
+        // String path = "/sync_data/sync_with_json";
         String path = "/sync_data/test";
-
-        Map<String, String> headers = new HashMap<String, String>();
-        // API 调用者生成的 UUID，结合时间戳防重放
-        headers.put("X-Ca-Nonce", UUID.randomUUID().toString());
-        headers.put("Content-Type", "application/json");
-
-        Request request = new Request(Method.GET, HttpSchema.HTTPS + HOST, path, APP_KEY, APP_SECRET, Constants.DEFAULT_TIMEOUT);
-        request.setHeaders(headers);
-        request.setSignHeaderPrefixList(CUSTOM_HEADERS_TO_SIGN_PREFIX);
-        request.setQuerys(new HashMap<String, String>(0));
-        //调用服务端
-        Response response = Client.execute(request);
-        String responseBodyStr = response.getBody();
-        JSONObject responseBody = JSON.parseObject(responseBodyStr);
-        System.out.println(responseBody);
-    }
-
-
-    /**
-     * 视频客流同步
-     *
-     * @throws Exception
-     */
-    @Test
-    public void syncStoreTrack() throws Exception {
-        //请求path
-        String path = "/sync_data/sync_with_json";
         //Body内容
         String body = "{}";
         // String body = "{}";
@@ -101,5 +62,9 @@ public class StoreTrackApiDemo {
         String responseBodyStr = response.getBody();
         JSONObject responseBody = JSON.parseObject(responseBodyStr);
         System.out.println(responseBody);
+    }
+
+    public static void main(String[] args) throws Exception {
+        test();
     }
 }
