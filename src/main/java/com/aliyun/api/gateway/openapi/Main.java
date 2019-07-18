@@ -19,14 +19,11 @@ import java.util.*;
  */
 public class Main {
 
-    // 203724351
-    // 30j96k3rew4jdk6rxh89nw8e0ec2ox0a
-    // APP KEY
-    private final static String APP_KEY = "26010215";
+    private final static String APP_KEY = "";
     // APP密钥
-    private final static String APP_SECRET = "6abb96c01e20f44d0cc8e2ad17ffaac6";
+    private final static String APP_SECRET = "";
     //API域名
-    private final static String HOST = "storetrack-api.ikea.cn";
+    private final static String HOST = "";
     //自定义参与签名Header前缀（可选,默认只有"X-Ca-"开头的参与到Header签名）
     private final static List<String> CUSTOM_HEADERS_TO_SIGN_PREFIX = new ArrayList<String>();
 
@@ -66,5 +63,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         test();
+        Demo_StoreTrack_API_Group.storeTrackApiHttpsTest();
+        Demo_StoreTrack_API_Group.storeTrackApiHttpTest();
     }
 }
